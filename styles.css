@@ -235,7 +235,8 @@ textarea {
 }
 
 .input-panel,
-.generated-panel {
+.generated-panel,
+.unclassified-panel {
   background: var(--surface-strong);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -377,6 +378,17 @@ textarea {
   margin: 8px 0 0;
   color: var(--accent-strong);
   font-weight: 800;
+}
+
+.helper-note {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+#unclassifiedOutput {
+  background: #fbfbf8;
+  min-height: 110px;
 }
 
 .empty-note {

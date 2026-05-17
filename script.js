@@ -1,170 +1,12 @@
-const officialFieldsFPB505 = [
-  {
-    id: "relatorioVoo",
-    title: "RELATÓRIO DE VOO",
-    keywords: ["relatorio de voo", "relatorio", "preenchimento", "registro do voo"],
-  },
-  {
-    id: "inspecoesCheques",
-    title: "INSPEÇÕES E CHEQUES",
-    keywords: ["inspecao", "inspecoes", "cheque", "cheques", "checklist", "lista de verificacao"],
-  },
-  {
-    id: "briefingDecolagem",
-    title: "BRIEFING DE DECOLAGEM",
-    keywords: ["briefing de decolagem", "briefing", "decolagem abortada", "pane na decolagem"],
-  },
-  {
-    id: "partida",
-    title: "PARTIDA",
-    keywords: ["partida", "acionamento", "motor acionado", "acionou"],
-  },
-  {
-    id: "taxi",
-    title: "TÁXI",
-    keywords: ["taxi", "taxiar", "taxiamento", "freio", "direcional no solo"],
-  },
-  {
-    id: "decolagemCurta",
-    title: "DECOLAGEM CURTA",
-    keywords: ["decolagem curta", "pista curta", "decolou curto"],
-  },
-  {
-    id: "nivelamento",
-    title: "NIVELAMENTO",
-    keywords: ["nivelamento", "nivelou", "nivelar", "manteve altitude", "altitude"],
-  },
-  {
-    id: "trafegoNormal",
-    title: "TRÁFEGO NORMAL",
-    keywords: ["trafego normal", "perna do vento", "perna base", "final normal", "circuito normal"],
-  },
-  {
-    id: "trafegoSemFlapes",
-    title: "TRÁFEGO SEM FLAPES",
-    keywords: ["trafego sem flap", "trafego sem flape", "sem flapes", "sem flap"],
-  },
-  {
-    id: "trafegoMonomotorSimulado",
-    title: "TRÁFEGO MONOMOTOR SIMULADO",
-    keywords: ["trafego monomotor", "monomotor simulado", "monomotor", "motor critico", "motor inoperante"],
-  },
-  {
-    id: "enquadramentoPista",
-    title: "ENQUADRAMENTO DE PISTA",
-    keywords: ["enquadramento", "enquadrou", "eixo da pista", "alinhamento da pista", "rampa"],
-  },
-  {
-    id: "julgamentoFlapes",
-    title: "JULGAMENTO DE FLAPES",
-    keywords: ["julgamento de flapes", "julgamento de flap", "flapes", "flape"],
-  },
-  {
-    id: "arremetidaArBimotor",
-    title: "ARREMETIDA NO AR BIMOTOR",
-    keywords: ["arremetida no ar bimotor", "arremeteu no ar bimotor", "arremetida bimotor"],
-  },
-  {
-    id: "arremetidaArMonomotor",
-    title: "ARREMETIDA NO AR MONOMOTOR",
-    keywords: ["arremetida no ar monomotor", "arremeteu no ar monomotor", "arremetida monomotor"],
-  },
-  {
-    id: "arremetidaSolo",
-    title: "ARREMETIDA NO SOLO",
-    keywords: ["arremetida no solo", "arremeteu no solo", "rejeicao de pouso"],
-  },
-  {
-    id: "pousoNormal",
-    title: "POUSO NORMAL",
-    keywords: ["pouso normal", "pousou normal", "toque normal"],
-  },
-  {
-    id: "pousoSemFlapes",
-    title: "POUSO SEM FLAPES",
-    keywords: ["pouso sem flap", "pouso sem flape", "pouso sem flapes"],
-  },
-  {
-    id: "pousoMonomotorSimulado",
-    title: "POUSO MONOMOTOR SIMULADO",
-    keywords: ["pouso monomotor", "pouso monomotor simulado"],
-  },
-  {
-    id: "pousoCurto",
-    title: "POUSO CURTO",
-    keywords: ["pouso curto", "pista curta no pouso"],
-  },
-  {
-    id: "usoReverso",
-    title: "USO DO REVERSO",
-    keywords: ["reverso", "uso do reverso", "aplicou reverso"],
-  },
-  {
-    id: "usoMotores",
-    title: "USO DOS MOTORES",
-    keywords: ["uso dos motores", "motores", "motor", "potencia", "manete"],
-  },
-  {
-    id: "usoComandos",
-    title: "USO DOS COMANDOS",
-    keywords: ["uso dos comandos", "comandos", "profundor", "aileron", "leme", "comando"],
-  },
-  {
-    id: "usoCompensadores",
-    title: "USO DOS COMPENSADORES",
-    keywords: ["compensador", "compensadores", "compensou", "trim"],
-  },
-  {
-    id: "estacionamento",
-    title: "ESTACIONAMENTO",
-    keywords: ["estacionamento", "estacionou", "corte dos motores", "corte do motor", "parada final"],
-  },
-];
-
-const confirmationField = {
-  id: "necessitaConfirmacao",
-  title: "NECESSITA CONFIRMAÇÃO DO IN",
-  keywords: [],
-  isConfirmation: true,
-};
-
-const missions = {
-  "FPB5-05": {
-    label: "FPB5-05",
-    note: "Campos oficiais informados para a OI da FPB5-05.",
-    fields: [...officialFieldsFPB505, confirmationField],
-  },
-};
-
-// Esta base e somente exibida na interface. Ela nao entra no gerador da ficha.
-const styleExamplesFPB505 = [
-  {
-    item: "Registro objetivo",
-    text: "Procedimento bem realizado, mantendo a sequencia prevista.",
-    note: "Frase curta, tecnica e limitada ao item observado.",
-  },
-  {
-    item: "Orientacao do IN",
-    text: "Orientado quanto ao ajuste de velocidade durante a execucao.",
-    note: "Registra a orientacao sem acrescentar parametro nao citado.",
-  },
-  {
-    item: "Correcao autonoma",
-    text: "Corrigiu sozinho a tendencia observada apos orientacao.",
-    note: "Usar somente se a transcricao indicar correcao autonoma.",
-  },
-  {
-    item: "Quantidade citada",
-    text: "Realizados dois procedimentos conforme orientacao.",
-    note: "Numeros e parametros so devem aparecer quando citados no audio.",
-  },
-];
+import { missions } from "./data/missions/index.js";
+import { styleExamplesByMission } from "./data/style-examples/index.js";
 
 const state = {
   currentMission: "FPB5-05",
   gender: "male",
   fieldValues: {},
   fieldNotes: {},
+  unclassifiedBlocks: [],
 };
 
 const missionSelect = document.querySelector("#missionSelect");
@@ -178,6 +20,20 @@ const finalOutput = document.querySelector("#finalOutput");
 const copyButton = document.querySelector("#copyButton");
 const copyStatus = document.querySelector("#copyStatus");
 const generationStatus = document.querySelector("#generationStatus");
+const unclassifiedOutput = document.querySelector("#unclassifiedOutput");
+
+function renderMissionOptions() {
+  missionSelect.innerHTML = "";
+
+  Object.values(missions).forEach((mission) => {
+    const option = document.createElement("option");
+    option.value = mission.id;
+    option.textContent = mission.name ?? mission.id;
+    missionSelect.appendChild(option);
+  });
+
+  missionSelect.value = state.currentMission;
+}
 
 function normalizeText(text) {
   return text
@@ -186,77 +42,50 @@ function normalizeText(text) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-function splitSentences(text) {
-  const normalizedBreaks = text.replace(/\n+/g, ". ");
-  const matches = normalizedBreaks.match(/[^.!?]+[.!?]?/g) ?? [];
-  return matches.map((sentence) => sentence.trim()).filter(Boolean);
-}
-
-function getGenderedWord(base) {
-  const dictionary = {
-    aluno: { male: "aluno", female: "aluna" },
-    orientado: { male: "orientado", female: "orientada" },
-    corrigido: { male: "corrigido", female: "corrigida" },
-    adequado: { male: "adequado", female: "adequada" },
-    sozinho: { male: "sozinho", female: "sozinha" },
-  };
-
-  return dictionary[base]?.[state.gender] ?? base;
-}
-
-function matchCase(base) {
-  const replacement = getGenderedWord(base);
-  return (match) => {
-    if (match === match.toUpperCase()) {
-      return replacement.toUpperCase();
-    }
-    if (match[0] === match[0].toUpperCase()) {
-      return replacement[0].toUpperCase() + replacement.slice(1);
-    }
-    return replacement;
-  };
-}
-
-function applyGenderAgreement(text) {
-  if (!text) {
-    return "";
+function splitIntoBlocks(text) {
+  const normalized = text.replace(/\r\n/g, "\n").trim();
+  if (!normalized) {
+    return [];
   }
 
-  let adjusted = text;
-  adjusted = adjusted.replace(/\baluno\b/gi, matchCase("aluno"));
-  adjusted = adjusted.replace(/\baluna\b/gi, matchCase("aluno"));
-  adjusted = adjusted.replace(/\borientado\b/gi, matchCase("orientado"));
-  adjusted = adjusted.replace(/\borientada\b/gi, matchCase("orientado"));
-  adjusted = adjusted.replace(/\bcorrigido\b/gi, matchCase("corrigido"));
-  adjusted = adjusted.replace(/\bcorrigida\b/gi, matchCase("corrigido"));
-  adjusted = adjusted.replace(/\badequado\b/gi, matchCase("adequado"));
-  adjusted = adjusted.replace(/\badequada\b/gi, matchCase("adequado"));
-  adjusted = adjusted.replace(/\bsozinho\b/gi, matchCase("sozinho"));
-  adjusted = adjusted.replace(/\bsozinha\b/gi, matchCase("sozinho"));
-  return adjusted;
+  const paragraphBlocks = normalized
+    .split(/\n\s*\n+/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+
+  if (paragraphBlocks.length > 1) {
+    return paragraphBlocks;
+  }
+
+  const sentenceBlocks = normalized.match(/[^.!?]+[.!?]?/g) ?? [];
+  return sentenceBlocks.map((block) => block.trim()).filter(Boolean);
 }
 
-function formatLines(sentences, options = {}) {
-  const uniqueSentences = [...new Set(sentences)];
-  const lines = uniqueSentences.map((sentence) => {
-    const text = options.applyGender ? applyGenderAgreement(sentence) : sentence;
-    return `- ${text}`;
-  });
+function formatBlocks(blocks) {
+  return blocks.join("\n\n");
+}
 
-  return lines.join("\n");
+function trimLooseQuotes(text) {
+  return text
+    .replace(/^[\s"'“”‘’]+/, "")
+    .replace(/[\s"'“”‘’]+$/, "");
+}
+
+function formatSuggestionBlocks(blocks) {
+  return formatBlocks(blocks.map((block) => trimLooseQuotes(block)));
 }
 
 function escapeRegExp(text) {
   return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function keywordMatches(normalizedSentence, normalizedKeyword) {
-  if (normalizedKeyword.includes(" ")) {
-    return normalizedSentence.includes(normalizedKeyword);
+function markerMatches(normalizedBlock, normalizedMarker) {
+  if (normalizedMarker.includes(" ")) {
+    return normalizedBlock.includes(normalizedMarker);
   }
 
-  const wordPattern = new RegExp(`\\b${escapeRegExp(normalizedKeyword)}\\b`);
-  return wordPattern.test(normalizedSentence);
+  const wordPattern = new RegExp(`\\b${escapeRegExp(normalizedMarker)}\\b`);
+  return wordPattern.test(normalizedBlock);
 }
 
 function createEmptyFieldValues() {
@@ -273,59 +102,66 @@ function createEmptyFieldValues() {
   return values;
 }
 
-function findMatchingFields(normalizedSentence) {
+function detectFieldMarker(block) {
   const mission = missions[state.currentMission];
+  const normalizedBlock = normalizeText(block);
   const matches = mission.fields
-    .filter((field) => !field.isConfirmation)
     .map((field) => {
-      const matchedKeywords = field.keywords
-        .map((keyword) => normalizeText(keyword))
-        .filter((keyword) => keywordMatches(normalizedSentence, keyword));
+      const matchedMarkers = (field.markers ?? [])
+        .map((marker) => normalizeText(marker))
+        .filter((marker) => markerMatches(normalizedBlock, marker));
 
-      const score = matchedKeywords.reduce((longest, keyword) => Math.max(longest, keyword.length), 0);
+      const score = matchedMarkers.reduce((longest, marker) => Math.max(longest, marker.length), 0);
       return { field, score };
     })
     .filter((match) => match.score > 0);
 
-  if (matches.length <= 1) {
-    return matches.map((match) => match.field);
+  if (!matches.length) {
+    return null;
   }
 
   const bestScore = Math.max(...matches.map((match) => match.score));
-  return matches
-    .filter((match) => match.score === bestScore)
-    .map((match) => match.field);
+  const bestMatches = matches.filter((match) => match.score === bestScore);
+  return bestMatches.length === 1 ? bestMatches[0].field : null;
 }
 
 function classifyTranscript(transcript) {
   const result = createEmptyFieldValues();
-  const sentences = splitSentences(transcript);
+  const blocks = splitIntoBlocks(transcript);
   const buckets = {};
+  const unclassifiedBlocks = [];
+  let activeFieldId = null;
 
   missions[state.currentMission].fields.forEach((field) => {
     buckets[field.id] = [];
   });
 
-  sentences.forEach((sentence) => {
-    const normalizedSentence = normalizeText(sentence);
-    const matches = findMatchingFields(normalizedSentence);
+  blocks.forEach((block) => {
+    const detectedField = detectFieldMarker(block);
 
-    if (matches.length === 1) {
-      buckets[matches[0].id].push(sentence);
+    if (detectedField) {
+      activeFieldId = detectedField.id;
+    }
+
+    if (activeFieldId) {
+      buckets[activeFieldId].push(block);
       return;
     }
 
-    buckets[confirmationField.id].push(sentence);
+    unclassifiedBlocks.push(block);
   });
 
-  Object.entries(buckets).forEach(([fieldId, matchedSentences]) => {
+  Object.entries(buckets).forEach(([fieldId, matchedBlocks]) => {
     result[fieldId] = {
-      original: formatLines(matchedSentences),
-      suggestion: formatLines(matchedSentences, { applyGender: true }),
+      original: formatBlocks(matchedBlocks),
+      suggestion: formatSuggestionBlocks(matchedBlocks),
     };
   });
 
-  return result;
+  return {
+    fieldValues: result,
+    unclassifiedBlocks,
+  };
 }
 
 function getFieldValue(fieldId) {
@@ -345,8 +181,17 @@ function renderMissionFields() {
 
 function renderStyleExamples() {
   styleExamples.innerHTML = "";
+  const styleReference = styleExamplesByMission[state.currentMission];
 
-  styleExamplesFPB505.forEach((example) => {
+  if (!styleReference) {
+    const empty = document.createElement("p");
+    empty.className = "empty-note";
+    empty.textContent = "Nenhuma referencia de estilo cadastrada para esta missao.";
+    styleExamples.appendChild(empty);
+    return;
+  }
+
+  styleReference.examples.forEach((example) => {
     const article = document.createElement("article");
     article.className = "style-example";
 
@@ -363,6 +208,16 @@ function renderStyleExamples() {
     article.append(title, text, note);
     styleExamples.appendChild(article);
   });
+}
+
+function renderUnclassifiedBlocks() {
+  if (!unclassifiedOutput) {
+    return;
+  }
+
+  unclassifiedOutput.value = state.unclassifiedBlocks.length
+    ? formatBlocks(state.unclassifiedBlocks)
+    : "Nenhum trecho fora de contexto foi detectado.";
 }
 
 function renderFieldEditors() {
@@ -437,7 +292,7 @@ function updateFinalOutput() {
   const mission = missions[state.currentMission];
   const genderLabel = state.gender === "male" ? "Aluno" : "Aluna";
   const lines = [
-    `Missao: ${mission.label}`,
+    `Missao: ${mission.label ?? mission.id}`,
     `Aluno/aluna: ${genderLabel}`,
     "",
     "Ficha inicial - revisar pelo IN",
@@ -458,6 +313,7 @@ function updateFinalOutput() {
 function clearGeneratedFields() {
   const mission = missions[state.currentMission];
   state.fieldValues = createEmptyFieldValues();
+  state.unclassifiedBlocks = [];
 
   mission.fields.forEach((field) => {
     state.fieldNotes[field.id] = "";
@@ -465,6 +321,7 @@ function clearGeneratedFields() {
 
   generationStatus.textContent = "Campos limpos";
   renderFieldEditors();
+  renderUnclassifiedBlocks();
   updateFinalOutput();
 }
 
@@ -477,9 +334,12 @@ function generateInitialSheet() {
     return;
   }
 
-  state.fieldValues = classifyTranscript(transcript);
+  const classification = classifyTranscript(transcript);
+  state.fieldValues = classification.fieldValues;
+  state.unclassifiedBlocks = classification.unclassifiedBlocks;
   generationStatus.textContent = "Sugestao gerada";
   renderFieldEditors();
+  renderUnclassifiedBlocks();
   updateFinalOutput();
 }
 
@@ -500,14 +360,6 @@ function syncGenderFromInput() {
   const checked = document.querySelector("input[name='studentGender']:checked");
   state.gender = checked?.value ?? "male";
 
-  missions[state.currentMission].fields.forEach((field) => {
-    const fieldValue = getFieldValue(field.id);
-    state.fieldValues[field.id] = {
-      original: fieldValue.original,
-      suggestion: applyGenderAgreement(fieldValue.suggestion),
-    };
-  });
-
   renderFieldEditors();
   updateFinalOutput();
 }
@@ -516,6 +368,7 @@ missionSelect.addEventListener("change", () => {
   state.currentMission = missionSelect.value;
   clearGeneratedFields();
   renderMissionFields();
+  renderStyleExamples();
 });
 
 document.querySelectorAll("input[name='studentGender']").forEach((input) => {
@@ -526,8 +379,10 @@ generateButton.addEventListener("click", generateInitialSheet);
 clearButton.addEventListener("click", clearGeneratedFields);
 copyButton.addEventListener("click", copyFinalSheet);
 
+renderMissionOptions();
 state.fieldValues = createEmptyFieldValues();
 renderMissionFields();
 renderStyleExamples();
 renderFieldEditors();
+renderUnclassifiedBlocks();
 updateFinalOutput();
