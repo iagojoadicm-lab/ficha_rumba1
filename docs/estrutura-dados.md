@@ -2,19 +2,19 @@
 
 ## Missoes
 
-Cada missao fica em `data/missions/<missao>.js` e exporta um objeto com:
+Cada missao fica em `data/missions/<missao>.js` e exporta um objeto com os dados oficiais da OI:
 
 ```js
 export const fpb505 = {
   id: "FPB5-05",
   name: "FPB5-05",
-  phase: "Fase Basica",
-  group: "Adaptacao",
+  phase: "Fase B\u00e1sica",
+  group: "Adapta\u00e7\u00e3o",
   fields: [
     {
       id: "relatorioVoo",
-      title: "RELATÓRIO DE VOO",
-      markers: ["relatorio de voo", "registro do voo"],
+      title: "RELAT\u00d3RIO DE VOO",
+      markersStrong: ["relatorio de voo", "registro do voo"],
       keywords: ["relatorio de voo", "relatorio"],
     },
   ],
@@ -22,6 +22,13 @@ export const fpb505 = {
 ```
 
 Depois, registre a missao em `data/missions/index.js`.
+
+## Campos
+
+- `id`: identificador interno estavel, sem acentos ou espacos.
+- `title`: titulo oficial do item da OI.
+- `markersStrong`: expressoes fortes que indicam mudanca de item na fala do IN.
+- `keywords`: termos auxiliares para uso futuro. A classificacao atual nao usa `keywords`.
 
 ## Exemplos de estilo
 
@@ -46,19 +53,28 @@ Depois, registre os exemplos em `data/style-examples/index.js`.
 
 ## Regra de separacao
 
-`script.js` pode importar missoes e exemplos, mas a classificacao deve usar somente:
+A classificacao deve usar somente:
 
 - transcricao colada pelo IN;
-- campos e palavras-chave da missao selecionada.
+- campos oficiais da missao selecionada;
+- `markersStrong` da missao selecionada.
 
-Os exemplos de estilo devem ser usados apenas para exibicao visual.
+Os exemplos de estilo nao entram na classificacao e nao devem aparecer como conteudo da ficha.
 
 ## Contexto ativo
 
-Cada campo deve ter `markers`, que sao expressoes fortes para detectar a mudanca de item na fala do IN.
-
 Durante a classificacao:
 
-- quando um marker e encontrado, o item vira o contexto ativo;
+- quando um `markersStrong` e encontrado, o item vira o contexto ativo;
 - blocos seguintes sem novo marker continuam no contexto ativo;
 - trechos antes de qualquer contexto ativo ficam em area auxiliar, fora da ficha final.
+
+## Depuracao
+
+Apos gerar uma ficha, o app expoe no navegador:
+
+```js
+window.fichaRumbaDebug.getClassificationDebug()
+```
+
+Esse retorno mostra bloco por bloco qual item recebeu o texto e qual marker acionou a mudanca de contexto.

@@ -10,21 +10,21 @@
     <main class="app-shell">
       <header class="app-header">
         <div>
-          <p class="eyebrow">Curso C-95 | Fase Basica</p>
+          <p class="eyebrow">Curso C-95 | Fase B&aacute;sica</p>
           <h1>Ficha Rumba</h1>
         </div>
-        <p class="header-note">Auxiliar local para preparar uma sugestao inicial de ficha. A revisao do IN permanece obrigatoria.</p>
+        <p class="header-note">Auxiliar local para preparar uma sugest&atilde;o inicial de ficha. A revis&atilde;o do IN permanece obrigat&oacute;ria.</p>
       </header>
 
       <section class="notice" aria-label="Aviso de uso">
-        <strong>Regra de seguranca:</strong>
-        a ficha gerada usa somente a transcricao colada. Exemplos de escrita sao apenas referencia visual de estilo e nao sao fonte de fatos.
+        <strong>Regra de seguran&ccedil;a:</strong>
+        a ficha gerada usa somente a transcri&ccedil;&atilde;o colada. A vers&atilde;o final deve ser revisada pelo IN.
       </section>
 
       <section class="workspace">
-        <aside class="setup-panel" aria-label="Configuracao da ficha">
+        <aside class="setup-panel" aria-label="Configura&ccedil;&atilde;o da ficha">
           <div class="panel-block">
-            <label for="missionSelect">Missao</label>
+            <label for="missionSelect">Miss&atilde;o</label>
             <select id="missionSelect">
               <option value="FPB5-05">FPB5-05</option>
             </select>
@@ -32,6 +32,7 @@
 
           <div class="panel-block">
             <span class="field-label">Aluno/aluna</span>
+            <p class="control-note">Usado apenas na identifica&ccedil;&atilde;o da ficha.</p>
             <div class="segmented-control" role="radiogroup" aria-label="Selecionar aluno ou aluna">
               <label>
                 <input type="radio" name="studentGender" value="male" checked>
@@ -52,8 +53,8 @@
 
         <section class="main-panel">
           <div class="input-panel">
-            <label for="transcriptInput">Transcricao do audio do IN</label>
-            <textarea id="transcriptInput" rows="10" placeholder="Cole aqui a transcricao do audio. A classificacao simulada usa apenas este texto."></textarea>
+            <label for="transcriptInput">Transcri&ccedil;&atilde;o do &aacute;udio do IN</label>
+            <textarea id="transcriptInput" rows="10" placeholder="Cole aqui a transcri&ccedil;&atilde;o do &aacute;udio. A classifica&ccedil;&atilde;o simulada usa apenas este texto."></textarea>
             <div class="actions-row">
               <button id="generateButton" type="button">Gerar ficha inicial</button>
               <button id="clearButton" type="button" class="secondary-button">Limpar campos</button>
@@ -63,42 +64,41 @@
           <section class="generated-panel" aria-label="Ficha inicial gerada">
             <div class="section-heading">
               <div>
-                <p class="eyebrow">Sugestao inicial</p>
-                <h2>Ficha editavel</h2>
+                <p class="eyebrow">Sugest&atilde;o inicial</p>
+                <h2>Ficha edit&aacute;vel</h2>
               </div>
-              <span id="generationStatus" class="status-pill">Aguardando transcricao</span>
+              <div class="heading-status">
+                <span id="fieldCount" class="status-pill">0 preenchidos de 0</span>
+                <span id="generationStatus" class="status-pill">Aguardando transcri&ccedil;&atilde;o</span>
+              </div>
             </div>
+
+            <div class="filter-bar" aria-label="Filtrar campos da ficha">
+              <button type="button" class="filter-button is-active" data-filter="all">Todos</button>
+              <button type="button" class="filter-button" data-filter="filled">Preenchidos</button>
+              <button type="button" class="filter-button" data-filter="empty">Vazios</button>
+            </div>
+
             <div id="fieldEditors" class="field-editors"></div>
           </section>
 
-          <section class="unclassified-panel" aria-label="Trechos nao classificados">
+          <section id="unclassifiedPanel" class="unclassified-panel" aria-label="Trechos n&atilde;o classificados" hidden>
             <div class="section-heading">
               <div>
                 <p class="eyebrow">Auxiliar</p>
-                <h2>Trechos nao classificados</h2>
+                <h2>Trechos n&atilde;o classificados</h2>
               </div>
             </div>
             <p class="helper-note">Estes trechos ficam fora da ficha final. Use apenas para revisar partes sem item ativo identificado.</p>
             <textarea id="unclassifiedOutput" rows="5" readonly></textarea>
           </section>
         </section>
-
-        <aside class="reference-panel" aria-label="Referencia de estilo">
-          <div class="section-heading compact">
-            <div>
-              <p class="eyebrow">FPB5-05</p>
-              <h2>Referencia de estilo</h2>
-            </div>
-          </div>
-          <p class="reference-warning">Use apenas para observar forma, linguagem e concisao. Nao copie nem importe conteudo para a nova ficha.</p>
-          <div id="styleExamples" class="style-examples"></div>
-        </aside>
       </section>
 
       <section class="final-panel" aria-label="Ficha final">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Saida</p>
+            <p class="eyebrow">Sa&iacute;da</p>
             <h2>Ficha final para copiar</h2>
           </div>
           <button id="copyButton" type="button">Copiar ficha final</button>
@@ -106,6 +106,47 @@
         <textarea id="finalOutput" rows="12" readonly></textarea>
         <p id="copyStatus" class="copy-status" aria-live="polite"></p>
       </section>
+
+      <aside id="itemChatPanel" class="item-chat-panel" aria-label="Chat do item" hidden>
+        <header class="item-chat-header">
+          <div>
+            <p class="eyebrow">Chat do item</p>
+            <h2 id="itemChatTitle">Item</h2>
+          </div>
+          <button id="closeItemChatButton" type="button" class="icon-button" aria-label="Fechar chat">x</button>
+        </header>
+
+        <div class="item-chat-current">
+          <div class="version-heading">
+            <strong>Coment&aacute;rio atual</strong>
+            <span id="itemChatCurrentVersion" class="status-pill">Vers&atilde;o 1</span>
+            <span class="history-icon" aria-hidden="true">&olarr;</span>
+            <span id="itemChatVersionCount" class="version-count">1 vers&atilde;o</span>
+          </div>
+          <textarea id="itemChatCurrentText" rows="5" readonly></textarea>
+        </div>
+
+        <div class="item-chat-body">
+          <div class="chat-section-heading">
+            <div>
+              <h3>Converse com a IA sobre este item</h3>
+              <p>O contexto est&aacute; restrito ao campo selecionado.</p>
+            </div>
+            <button id="resetItemChatButton" type="button" class="icon-button" aria-label="Reiniciar conversa">&olarr;</button>
+          </div>
+          <div id="itemChatMessages" class="item-chat-messages" aria-live="polite"></div>
+        </div>
+
+        <div class="item-chat-composer">
+          <div class="chat-actions">
+            <textarea id="itemChatInput" rows="2" placeholder="Digite sua mensagem..."></textarea>
+            <button id="recordItemChatButton" type="button" class="secondary-button" aria-label="Gravar &aacute;udio">&#127908;</button>
+            <button id="stopItemChatButton" type="button" class="secondary-button" disabled>Parar</button>
+            <button id="sendItemChatButton" type="button" aria-label="Enviar mensagem">&rtrif;</button>
+          </div>
+          <p id="itemChatStatus" class="audio-status">As respostas da IA podem conter imprecis&otilde;es. Sempre revise as informa&ccedil;&otilde;es.</p>
+        </div>
+      </aside>
     </main>
 
     <script type="module" src="script.js"></script>
